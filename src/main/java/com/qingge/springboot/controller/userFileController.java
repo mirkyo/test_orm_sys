@@ -5,13 +5,10 @@ import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.SecureUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.qingge.springboot.common.Result;
 import com.qingge.springboot.entity.userFile;
 import com.qingge.springboot.mapper.userFileMapper;
-import io.swagger.models.auth.In;
-import org.openxmlformats.schemas.drawingml.x2006.main.CTEffectStyleItem;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -60,6 +57,7 @@ public class userFileController {
 //            uploadParentFile.mkdirs();
 //        }
         String klass = originalFilename.split("-")[0]; // 获取班级信息
+        String filename = originalFilename.split("-")[1]; // 获取试卷信息
 
 
 
@@ -130,6 +128,7 @@ public class userFileController {
         saveFile.setKlass(klass);
         saveFile.setEndTime(endTime);
         saveFile.setUseTime(useTime);
+        saveFile.setFilename(filename);
         if(Integer.parseInt(useTime) <= Integer.parseInt(map.get("testTime"))){
             saveFile.setStatus("未超时");
         }else{
@@ -208,26 +207,26 @@ public class userFileController {
      * 分页查询接口
      * @param pageNum
      * @param pageSize
-     * @param name
      * @param klass
+     * @param filename
      * @return
      */
     @GetMapping("/page")
     public Result findPage(@RequestParam Integer pageNum,
                            @RequestParam Integer pageSize,
-                           @RequestParam(defaultValue = "") String name,
-                           @RequestParam(defaultValue = "") String klass){
+                           @RequestParam(defaultValue = "") String klass,
+                           @RequestParam(defaultValue = "") String filename){
 
 
         QueryWrapper<userFile> queryWrapper = new QueryWrapper<>();
         // 查询未删除的记录
         queryWrapper.eq("is_delete", false);
         queryWrapper.orderByDesc("id");
-        if(!"".equals(name)){
-            queryWrapper.like("name", name);
-        }
         if(!"".equals(klass)){
             queryWrapper.like("klass", klass);
+        }
+        if(!"".equals(filename)){
+            queryWrapper.like("filename", filename);
         }
         return Result.success(userfileMapper.selectPage(new Page<>(pageNum, pageSize), queryWrapper));
     }

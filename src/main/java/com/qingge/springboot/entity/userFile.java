@@ -23,5 +23,6 @@ public class userFile {
     private String endTime;
     private String useTime;
     private String status;
+    private String filename;
 
 }

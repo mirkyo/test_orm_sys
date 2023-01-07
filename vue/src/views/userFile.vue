@@ -2,6 +2,7 @@
   <div>
     <div style="margin: 10px 0">
       <el-input style="width: 200px" placeholder="请输入班级" suffix-icon="el-icon-search" v-model="klass"></el-input>
+      <el-input style="width: 200px" placeholder="请输入试卷名" suffix-icon="el-icon-search" v-model="filename"></el-input>
       <el-button class="ml-5" type="primary" @click="load">搜索</el-button>
       <el-button type="warning" @click="reset">重置</el-button>
     </div>
@@ -28,6 +29,7 @@
       <el-table-column prop="id" label="ID" width="80"></el-table-column>
       <el-table-column prop="name" label="文件名称" ></el-table-column>
       <el-table-column prop="klass" label="班级" ></el-table-column>
+      <el-table-column prop="filename" label="文件名" ></el-table-column>
       <el-table-column prop="endTime" label="结束时间" ></el-table-column>
       <el-table-column prop="useTime" label="用时" ></el-table-column>
       <el-table-column prop="status" label="状态" ></el-table-column>
@@ -83,6 +85,7 @@ export default {
     return {
       tableData: [],
       klass: '',
+      filename: '',
       multipleSelection: [],
       pageNum: 1,
       pageSize: 10,
@@ -120,6 +123,7 @@ export default {
 
     reset(){
       this.klass = ""
+      this.filename = ""
       this.load()
     },
     load(){
@@ -128,6 +132,7 @@ export default {
           pageNum: this.pageNum,
           pageSize: this.pageSize,
           klass: this.klass,
+          filename: this.filename,
         }
       }).then(res => {
         console.log(res)

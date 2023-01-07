@@ -194,6 +194,34 @@ public class FileController {
         return Result.success(fileMapper.selectPage(new Page<>(pageNum, pageSize), queryWrapper));
     }
 
+    @GetMapping("/page1")
+    public Result findPage1(@RequestParam Integer pageNum,
+                           @RequestParam Integer pageSize,
+                           @RequestParam(defaultValue = "") String name,
+                           @RequestParam(defaultValue = "") String klass,
+                           @RequestParam(defaultValue = "") String id,
+                           @RequestParam(defaultValue = "") String student){
+
+
+        QueryWrapper<Files> queryWrapper = new QueryWrapper<>();
+        // 查询未删除的记录
+        queryWrapper.eq("is_delete", false);
+        queryWrapper.orderByDesc("id");
+        if(!"".equals(name)){
+            queryWrapper.like("name", name);
+        }
+        if(!"".equals(klass)){
+            queryWrapper.like("klass", klass);
+        }
+        if(!"".equals(id)){
+            queryWrapper.like("id", id);
+        }
+        if(!"".equals(student)){
+            queryWrapper.like("student", student);
+        }
+        return Result.success(fileMapper.selectPage(new Page<>(pageNum, pageSize), queryWrapper));
+    }
+
 
 
 

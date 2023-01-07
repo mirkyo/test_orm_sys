@@ -88,7 +88,8 @@ export default {
       hour1: '',
       minutes: '',
       minutes1: '',
-      testTime: ''
+      testTime: '',
+      student: localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")).username : '',
     }
   },
   created(){
@@ -103,11 +104,12 @@ export default {
       this.load()
     },
     load(){
-      this.request.get("/file/page",{
+      this.request.get("/file/page1",{
         params:{
           pageNum: this.pageNum,
           pageSize: this.pageSize,
-          klass: this.klass // 按照班级查询试卷
+          klass: this.klass, // 按照班级查询试卷
+          student: this.student
         }
       }).then(res => {
         console.log("sdfsdfsdfsdf")

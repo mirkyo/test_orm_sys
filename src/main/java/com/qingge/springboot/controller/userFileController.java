@@ -232,5 +232,10 @@ public class userFileController {
         return Result.success(userfileMapper.selectPage(new Page<>(pageNum, pageSize), queryWrapper));
     }
 
+    @GetMapping("/test")
+    public Result iiu(){
+        return Result.success(userfileMapper.aaa());
+    }
+
 
 }

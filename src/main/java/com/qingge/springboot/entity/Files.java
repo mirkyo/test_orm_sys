@@ -22,5 +22,13 @@ public class Files{
     private String md5;
     private String startTime;
     private String testTime;
+    private Integer nnt;
+    private String subject;
+    private String lecturer;
+    private String invigilator;
+    private String mrn;
+    private String examEnv;
+    private String student;
+    private String bukao_student;
 
 }

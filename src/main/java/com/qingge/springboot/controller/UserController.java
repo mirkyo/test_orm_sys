@@ -103,19 +103,21 @@ public class UserController {
     public Result findPage(@RequestParam Integer pageNum,
                                @RequestParam Integer pageSize,
                                @RequestParam(defaultValue = "") String username,
-                               @RequestParam(defaultValue = "") String email,
-                               @RequestParam(defaultValue = "") String address) {
+                               @RequestParam(defaultValue = "") String klass,
+                               @RequestParam(defaultValue = "") String name) {
 
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         queryWrapper.orderByDesc("id");
         if(!"".equals(username)){
             queryWrapper.like("username", username);
         }
-        if(!"".equals(email)){
-            queryWrapper.like("email", email);
+
+        if(!"".equals(klass)){
+            queryWrapper.like("klass", klass);
         }
-        if(!"".equals(address)){
-            queryWrapper.like("address", address);
+
+        if(!"".equals(name)){
+            queryWrapper.like("name", name);
         }
 
 
@@ -136,12 +138,9 @@ public class UserController {
         // 自定义标题别名
         writer.addHeaderAlias("username", "用户名");
         writer.addHeaderAlias("password", "密码");
-        writer.addHeaderAlias("nickname", "昵称");
+        writer.addHeaderAlias("name", "姓名");
         writer.addHeaderAlias("klass", "班级");
-        writer.addHeaderAlias("phone", "电话");
-        writer.addHeaderAlias("address", "地址");
-        writer.addHeaderAlias("createTime", "创建时间");
-        writer.addHeaderAlias("avatarUrl", "头像");
+        writer.addHeaderAlias("number", "学号");
 
         // 一次性写出list内的对象到excel， 使用默认样式，强制输出标题
         writer.write(list, true);
@@ -175,16 +174,15 @@ public class UserController {
             User user = new User();
             user.setUsername((row.get(0).toString()));
             user.setPassword((row.get(1).toString()));
-            user.setNickname((row.get(2).toString()));
+            user.setName((row.get(2).toString()));
             user.setKlass((row.get(3).toString()));
-            user.setPhone((row.get(4).toString()));
-            user.setAddress((row.get(5).toString()));
-            user.setAvatarUrl((row.get(6).toString()));
+            user.setNumber((row.get(4).toString()));
             users.add(user);
         }
         userService.saveBatch(users);
         return Result.success(true);
     }
+
 
 }
 

@@ -54,7 +54,6 @@ public class FileController {
 //        if(!uploadParentFile.exists()){
 //            uploadParentFile.mkdirs();
 //        }
-        String klass = originalFilename.split("-")[0]; // 获取班级信息
 
         // 定义文件唯一的表示码
         String uuid = IdUtil.fastSimpleUUID();
@@ -94,7 +93,6 @@ public class FileController {
         saveFile.setSize(size/1024);
         saveFile.setUrl(url);
         saveFile.setMd5(md5);
-        saveFile.setKlass(klass);
         fileMapper.insert(saveFile);
         return url;
     }

@@ -38,23 +38,14 @@ public class User implements Serializable {
       @ApiModelProperty("密码")
       private String password;
 
-      @ApiModelProperty("昵称")
-      private String nickname;
+      @ApiModelProperty("姓名")
+      private String name;
 
       @ApiModelProperty("班级")
       private String klass;
 
-      @ApiModelProperty("电话")
-      private String phone;
-
-      @ApiModelProperty("地址")
-      private String address;
-
-      @ApiModelProperty("创建时间")
-      private LocalDateTime createTime;
-
-      @ApiModelProperty("头像")
-      private String avatarUrl;
+      @ApiModelProperty("学号")
+      private String number;
 
 
 }

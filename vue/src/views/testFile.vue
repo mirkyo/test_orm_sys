@@ -82,6 +82,36 @@
         <el-form-item label="考试时间">
           <el-input v-model="form.testTime" autocomplete="off"></el-input>
         </el-form-item>
+        <el-form-item label="班级">
+          <el-input v-model="form.klass" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="主讲教师">
+          <el-input v-model="form.lecturer" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="监考教师">
+          <el-input v-model="form.invigilator" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="人数">
+          <el-input v-model="form.nnt" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="学期">
+          <el-input v-model="form.semester" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="科目">
+          <el-input v-model="form.subject" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="机房名称">
+          <el-input v-model="form.mrn" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="考试环境">
+          <el-input v-model="form.examEnv" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="考试学生">
+          <el-input v-model="form.student" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="补考学生">
+          <el-input v-model="form.bukaoStudent" autocomplete="off"></el-input>
+        </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogFormVisible = false">取 消</el-button>

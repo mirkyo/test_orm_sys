@@ -62,6 +62,35 @@ app.on('ready', async () => {
       console.error('Vue Devtools failed to install:', e.toString())
     }
   }
+  let regedit = require('regedit');
+  let fs = require("fs");
+  regedit.list(['HKLM\\SOFTWARE\\Adobe\\Photoshop']).on('data', function(entry) {
+    let keys01 = entry.data.keys;
+    keys01.forEach(function(key){
+
+      regedit.list(['HKLM\\SOFTWARE\\Adobe\\Photoshop\\'+key]).on('data',function(e){
+
+        let sum_key = e.key;
+        var keys02 = e.data.keys;
+        if(keys02){
+
+          keys02.forEach(function(key){
+
+            if(key == 'ApplicationPath'){
+
+              regedit.list([sum_key+'\\'+key]).on('data',function(e){
+
+                let val = e.data.values;
+                let photoshop_path =   val[""].value;
+
+                console.log(photoshop_path+"\\Photoshop.exe");
+              });
+            }
+          });
+        }
+      });
+    })
+  });
   createWindow()
 })
 
